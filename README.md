@@ -47,6 +47,25 @@ Before you can do anything with Object Storage, the server must authenticate wit
 
    ```
    **Note**: If you use the sample, these variables should be changed inside `SimpleServer.java` file.
+   The current Bluemix credentials generate both domainId and domainName.
+
+The project currently hardcodes DOMAIN_ID as a static field. However, to successfully connect to the Object Storage service, this value has to come from the domainName field in the credentials object and not the domainId field (which one would think based off of similar naming).
+
+{
+"auth_url": "https://identity.open.softlayer.com",
+"project": "object_storage_ABCD123_99999_zzzz_1111_AAAAAAAAA",
+"projectId": "09090909...09090909",
+"region": "dallas",
+"userId": "95...95",
+"username": "admin_eb....eb",
+"password": "supersecretpassw0rd",
+"domainId": "9efab9efab9efab9efab9efab9efab9efab",
+"domainName": "123456",  <= THIS IS THE REQUIRED DOMAIN FIELD
+"role": "admin"
+}```
+
+Either the variable name should be updated or additional documentation should be added to clarify this.
+
 
    2. Add the following code to authenticate:
 
